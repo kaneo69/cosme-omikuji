@@ -19,7 +19,7 @@ const rounded = M_PLUS_Rounded_1c({
 
 export const metadata: Metadata = {
   title: "化粧品おみくじ",
-  description: "2026の気分と、今年力を入れるべきコスメを引くおみくじ",
+  description: "2026の気分と、今年力を入れるべきコスメ",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

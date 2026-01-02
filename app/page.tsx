@@ -29,14 +29,14 @@ export default function Home() {
             </h1>
 
             <p className="text-[13px] leading-relaxed text-[var(--muted)] tracking-[0.02em]">
-              2026の気分と、今年力を入れるべきコスメをランダムで表示
+              2026の気分と、今年力を入れるべきコスメ
             </p>
           </header>
 
           <OmikujiBox onDraw={onDraw} />
 
           <p className="text-[12px] text-[var(--muted)]">
-            何回でも引いてOK。気分で更新。
+            何回でも引いてOK♪
           </p>
         </div>
       </div>
