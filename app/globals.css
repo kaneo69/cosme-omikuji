@@ -2,10 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
-  height: 100%;
+:root{
+  --bg: #F7F2E8;
+  --paper: #FFFCF6;
+  --ink: #141414;
+  --muted: rgba(20,20,20,.62);
+  --border: #E6DED1;
+  --accent: #C1121F;
 }
 
-body {
+html, body { height: 100%; }
+
+body{
+  background: var(--bg);
+  color: var(--ink);
   -webkit-tap-highlight-color: transparent;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "palt";
 }

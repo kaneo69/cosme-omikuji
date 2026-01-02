@@ -12,7 +12,6 @@ function pickIndexAvoidingLast(n: number) {
   if (!Number.isNaN(last) && n > 1 && idx === last) {
     idx = (idx + 1 + Math.floor(Math.random() * (n - 1))) % n;
   }
-
   localStorage.setItem(key, String(idx));
   return idx;
 }
@@ -24,14 +23,12 @@ export default function ResultPage() {
     setPickedIndex(pickIndexAvoidingLast(results.length));
   }, []);
 
+  const picked = pickedIndex === null ? null : results[pickedIndex];
+
   const onAgain = useCallback(() => {
-    if (typeof navigator !== "undefined" && "vibrate" in navigator) {
-      navigator.vibrate(10);
-    }
+    if (typeof navigator !== "undefined" && "vibrate" in navigator) navigator.vibrate(10);
     setPickedIndex(pickIndexAvoidingLast(results.length));
   }, []);
-
-  const picked = pickedIndex === null ? null : results[pickedIndex];
 
   const onCopy = useCallback(async () => {
     if (!picked) return;
@@ -40,55 +37,57 @@ export default function ResultPage() {
       await navigator.clipboard.writeText(text);
       alert("コピーしました！");
     } catch {
-      alert("コピーに失敗しました（ブラウザ設定をご確認ください）");
+      alert("コピーに失敗しました");
     }
   }, [picked]);
 
   return (
-    <main className="min-h-screen relative overflow-hidden bg-[#F7F2E8] text-[#1B1B1B]">
-      {/* うっすら紙のムラ */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.08]"
+    <main className="min-h-screen relative overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 opacity-[0.06]"
         style={{
           background:
-            "radial-gradient(circle_at_15%_15%, rgba(255,255,255,1) 0%, transparent 45%)," +
-            "radial-gradient(circle_at_85%_25%, rgba(255,255,255,1) 0%, transparent 40%)," +
-            "radial-gradient(circle_at_35%_95%, rgba(0,0,0,1) 0%, transparent 55%)",
+            "radial-gradient(circle_at_15%_15%, rgba(255,255,255,1) 0%, transparent 50%)," +
+            "radial-gradient(circle_at_85%_25%, rgba(255,255,255,1) 0%, transparent 48%)," +
+            "radial-gradient(circle_at_35%_95%, rgba(0,0,0,1) 0%, transparent 62%)",
         }}
       />
 
-      <div className="min-h-screen grid place-items-center p-6">
-        <div className="grid gap-6 w-full place-items-center">
+      <div className="min-h-screen grid place-items-center px-6 py-10">
+        <div className="w-full max-w-[520px] grid gap-7">
           {picked && (
-            <div key={pickedIndex ?? "init"} className="w-full">
+            <div key={pickedIndex ?? "init"}>
               <PaperCard result={picked} />
             </div>
           )}
 
-          <div className="flex flex-wrap gap-3 justify-center">
+          <div className="grid gap-3">
+            {/* Primary */}
             <button
               onClick={onAgain}
-              className="px-5 py-2 rounded-full border border-[#C1121F] text-[#C1121F]
-                         bg-white/60 hover:bg-white transition"
+              className="h-11 rounded-xl bg-[var(--accent)] text-white
+                         hover:opacity-90 active:opacity-80 transition
+                         tracking-[0.08em] text-[14px] font-medium"
             >
               もう一回引く
             </button>
 
-            <button
-              onClick={onCopy}
-              className="px-5 py-2 rounded-full border border-[#E6DED1] bg-white/60
-                         hover:bg-white transition"
-            >
-              結果をコピー
-            </button>
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                onClick={onCopy}
+                className="h-11 rounded-xl border border-[var(--border)] bg-white/70
+                           hover:bg-white transition text-[13px]"
+              >
+                結果をコピー
+              </button>
 
-            <Link
-              href="/"
-              className="px-5 py-2 rounded-full border border-[#E6DED1] bg-white/60
-                         hover:bg-white transition"
-            >
-              TOPへ
-            </Link>
+              <Link
+                href="/"
+                className="h-11 rounded-xl border border-[var(--border)] bg-white/70
+                           hover:bg-white transition grid place-items-center text-[13px]"
+              >
+                TOPへ
+              </Link>
+            </div>
           </div>
         </div>
       </div>
