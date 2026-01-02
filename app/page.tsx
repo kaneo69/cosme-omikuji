@@ -11,31 +11,33 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen relative overflow-hidden">
-      <div className="pointer-events-none absolute inset-0 opacity-[0.06]"
-        style={{
-          background:
-            "radial-gradient(circle_at_18%_12%, rgba(255,255,255,1) 0%, transparent 50%)," +
-            "radial-gradient(circle_at_82%_30%, rgba(255,255,255,1) 0%, transparent 46%)," +
-            "radial-gradient(circle_at_30%_92%, rgba(0,0,0,1) 0%, transparent 62%)",
-        }}
-      />
-
+    <main className="min-h-screen pop-bg relative overflow-hidden">
       <div className="min-h-screen grid place-items-center px-6 py-10">
-        <div className="w-full max-w-[520px] grid gap-8 place-items-center text-center">
+        <div className="w-full max-w-[620px] grid gap-7 place-items-center text-center">
           <header className="grid gap-3">
-            <div className="text-[11px] tracking-[0.22em] text-[var(--muted)]">
-              COSME OMikuji 2026
+            <div className="inline-flex items-center gap-2 justify-center">
+              <span className="px-3 py-1 rounded-full bg-white/70 border border-[var(--border)] text-[11px] tracking-[0.18em]">
+                COSME OMikuji
+              </span>
+              <span className="px-3 py-1 rounded-full bg-white/70 border border-[var(--border)] text-[11px] tracking-[0.18em]">
+                2026
+              </span>
             </div>
-            <h1 className="font-serif text-[30px] leading-tight font-semibold tracking-[0.08em]">
+
+            <h1 className="font-[var(--font-pop)] text-[34px] leading-tight tracking-[0.06em]">
               化粧品おみくじ
             </h1>
-            <p className="text-[13px] leading-relaxed tracking-[0.03em] text-[var(--muted)]">
-              2026の気分と、今年力を入れるべきコスメ
+
+            <p className="text-[13px] leading-relaxed text-[var(--muted)] tracking-[0.02em]">
+              2026の気分と、今年力を入れるべきコスメをランダムで表示
             </p>
           </header>
 
           <OmikujiBox onDraw={onDraw} />
+
+          <p className="text-[12px] text-[var(--muted)]">
+            何回でも引いてOK。気分で更新。
+          </p>
         </div>
       </div>
     </main>

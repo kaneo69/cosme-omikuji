@@ -42,7 +42,7 @@ export default function ResultPage() {
   }, [picked]);
 
   return (
-    <main className="min-h-screen relative overflow-hidden">
+    <main className="min-h-screen pop-bg relative overflow-hidden">
       <div className="pointer-events-none absolute inset-0 opacity-[0.06]"
         style={{
           background:
@@ -60,35 +60,38 @@ export default function ResultPage() {
             </div>
           )}
 
-          <div className="grid gap-3">
-            {/* Primary */}
-            <button
-              onClick={onAgain}
-              className="h-11 rounded-xl bg-[var(--accent)] text-white
-                         hover:opacity-90 active:opacity-80 transition
-                         tracking-[0.08em] text-[14px] font-medium"
-            >
-              もう一回引く
-            </button>
+      <div className="grid gap-3">
+        <button
+    onClick={onAgain}
+    className="h-11 rounded-2xl bg-[var(--accent)] text-white
+               hover:opacity-90 active:opacity-80 transition
+               tracking-[0.08em] text-[14px] font-medium
+               shadow-[0_14px_30px_rgba(255,59,122,0.25)]"
+  >
+    もう一回引く
+        </button>
 
-            <div className="grid grid-cols-2 gap-3">
-              <button
-                onClick={onCopy}
-                className="h-11 rounded-xl border border-[var(--border)] bg-white/70
-                           hover:bg-white transition text-[13px]"
-              >
-                結果をコピー
-              </button>
+      <div className="grid grid-cols-2 gap-3">
+    <button
+      onClick={onCopy}
+      className="h-11 rounded-2xl border border-[var(--border)] bg-white/75
+                 hover:bg-white transition text-[13px]
+                 shadow-[0_10px_22px_rgba(0,0,0,0.08)]"
+    >
+      結果をコピー
+    </button>
 
-              <Link
-                href="/"
-                className="h-11 rounded-xl border border-[var(--border)] bg-white/70
-                           hover:bg-white transition grid place-items-center text-[13px]"
-              >
-                TOPへ
-              </Link>
-            </div>
+    <Link
+      href="/"
+      className="h-11 rounded-2xl border border-[var(--border)] bg-white/75
+                 hover:bg-white transition grid place-items-center text-[13px]
+                 shadow-[0_10px_22px_rgba(0,0,0,0.08)]"
+    >
+      TOPへ
+    </Link>
+      </div>
           </div>
+
         </div>
       </div>
     </main>

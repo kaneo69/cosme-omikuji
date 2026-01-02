@@ -3,21 +3,45 @@
 @tailwind utilities;
 
 :root{
-  --bg: #F7F2E8;
-  --paper: #FFFCF6;
+  --bg: #FFF5F1;
+  --paper: #FFFCF7;
   --ink: #141414;
   --muted: rgba(20,20,20,.62);
-  --border: #E6DED1;
-  --accent: #C1121F;
+  --border: rgba(20,20,20,.12);
+  --accent: #FF3B7A;
+  --accent2: #3B82F6;
+  --accent3: #F59E0B;
 }
 
 html, body { height: 100%; }
 
 body{
-  background: var(--bg);
   color: var(--ink);
+  background: var(--bg);
   -webkit-tap-highlight-color: transparent;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   font-feature-settings: "palt";
+}
+
+/* 背景：紙テクスチャ + ほんのりグラデ + ドット（ポップ） */
+.pop-bg{
+  background-image:
+    radial-gradient(circle at 18% 12%, rgba(255,255,255,.9) 0%, transparent 45%),
+    radial-gradient(circle at 80% 18%, rgba(255,255,255,.8) 0%, transparent 50%),
+    radial-gradient(circle at 30% 92%, rgba(0,0,0,.10) 0%, transparent 62%),
+    radial-gradient(circle, rgba(255,59,122,.10) 2px, transparent 2px),
+    url("/assets/paper-texture.png");
+  background-size:
+    auto,
+    auto,
+    auto,
+    28px 28px,
+    720px 720px;
+  background-position:
+    center,
+    center,
+    center,
+    6px 10px,
+    center;
 }
