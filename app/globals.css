@@ -1,14 +1,15 @@
 @import "tailwindcss";
 
 :root{
-  --bg: #FFF5F1;
-  --paper: #FFFCF7;
+  --bg: #fff5f1;
+  --paper: #fffcf7;
   --ink: #141414;
   --muted: rgba(20,20,20,.62);
   --border: rgba(20,20,20,.12);
-  --accent: #FF3B7A;
-  --accent2: #3B82F6;
-  --accent3: #F59E0B;
+
+  --accent: #ff3b7a;
+  --accent2: #3b82f6;
+  --accent3: #f59e0b;
 }
 
 html, body { height: 100%; }
@@ -20,13 +21,20 @@ body{
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   font-feature-settings: "palt";
+  position: relative;
 }
 
-/* 背景：紙テクスチャ + ほんのりグラデ + ドット（ポップ） */
+/* 花びらが後ろに回るように（全ページ共通） */
+main{
+  position: relative;
+  z-index: 1;
+}
+
+/* 背景：紙テクスチャ + ほんのりグラデ + ドット */
 .pop-bg{
   background-image:
-    radial-gradient(circle at 18% 12%, rgba(255,255,255,.9) 0%, transparent 45%),
-    radial-gradient(circle at 80% 18%, rgba(255,255,255,.8) 0%, transparent 50%),
+    radial-gradient(circle at 18% 12%, rgba(255,255,255,.92) 0%, transparent 45%),
+    radial-gradient(circle at 80% 18%, rgba(255,255,255,.86) 0%, transparent 50%),
     radial-gradient(circle at 30% 92%, rgba(0,0,0,.10) 0%, transparent 62%),
     radial-gradient(circle, rgba(255,59,122,.10) 2px, transparent 2px),
     url("/assets/paper-texture.png");
@@ -42,4 +50,64 @@ body{
     center,
     6px 10px,
     center;
+}
+
+/* ===== Camellia-like petals (椿っぽい花片) ===== */
+.petals{
+  z-index: 0;
+  opacity: 0.55;
+}
+
+.petal{
+  position: absolute;
+  top: -10%;
+
+  /* 椿っぽい丸み */
+  border-radius: 60% 60% 70% 70% / 70% 70% 55% 55%;
+
+  transform: rotate(var(--rot));
+
+  /* 椿の深い赤＋ハイライト */
+  background:
+    radial-gradient(circle at 35% 30%, rgba(255,255,255,0.95), rgba(255,255,255,0) 52%),
+    radial-gradient(circle at 70% 75%, rgba(255,255,255,0.18), rgba(255,255,255,0) 65%),
+    radial-gradient(circle at 55% 55%, rgba(190,0,0,0.35), rgba(190,0,0,0) 60%),
+    linear-gradient(160deg, rgba(178,0,0,0.78), rgba(120,0,0,0.72));
+
+  box-shadow: 0 10px 20px rgba(0,0,0,0.10);
+  filter: saturate(1.08);
+
+  animation: petal-fall var(--dur) linear infinite;
+  animation-delay: var(--delay);
+  will-change: transform, top, left, opacity;
+}
+
+/* 任意：金箔粒（App側で .petal-gold を付けた場合に効く） */
+.petal-gold{
+  border-radius: 6px;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), rgba(255,255,255,0) 45%),
+    linear-gradient(140deg, rgba(255,215,0,0.55), rgba(255,170,0,0.35));
+  box-shadow: 0 10px 22px rgba(255, 191, 0, 0.15);
+  opacity: 0.65;
+}
+
+@keyframes petal-fall{
+  0%{
+    transform: translate3d(0, -12vh, 0) rotate(var(--rot));
+    opacity: 0;
+  }
+  10%{ opacity: 0.9; }
+  100%{
+    transform: translate3d(var(--drift), 112vh, 0) rotate(calc(var(--rot) + 240deg));
+    opacity: 0;
+  }
+}
+
+/* “動きを減らす”設定の人には止める */
+@media (prefers-reduced-motion: reduce){
+  .petal{
+    animation: none;
+    display: none;
+  }
 }
